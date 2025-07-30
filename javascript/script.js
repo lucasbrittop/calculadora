@@ -1,6 +1,4 @@
 let displayValue = '';
-let operator = '';
-let numns = [];
 let display = document.getElementById('display');
 
 let somar = document.getElementById('btnPlus');
@@ -8,10 +6,7 @@ let subtrair = document.getElementById('btnMinus');
 let multiplicar = document.getElementById('btnMultiply');
 let dividir = document.getElementById('btnDivide');
 
-
 let del = document.getElementById('del');
-
-
 
 let botao1 = document.getElementById('btn1');
 let botao2 = document.getElementById('btn2');
@@ -27,17 +22,25 @@ let botao0 = document.getElementById('btn0');
 let igual = document.getElementById('btnEqual');
 let clear = document.getElementById('btnClear');
 
-let choice = document.getElementById('choice');
-
+// Função para atualizar o display
 function updateDisplay(value) {
-    display.value += value
+    // Verifica se o último caractere no display é um operador
+    let lastChar = display.value.charAt(display.value.length - 1);
+
+    // Se o último caractere for um operador e o valor inserido também for um operador, não faz nada
+    if (['+', '-', '*', '/'].includes(lastChar) && ['+', '-', '*', '/'].includes(value)) {
+        return;
+    }
+
+    display.value += value;  // Se não houver operadores consecutivos, adiciona o valor ao display
 }
 
+// Função para apagar o último caractere
 function delDisplay() {
     display.value = display.value.slice(0, -1);
-    numns.pop();
 }
 
+// Adiciona eventos aos botões numéricos
 botao1.addEventListener('click', function() {
     updateDisplay('1');
 });
@@ -78,89 +81,45 @@ botao0.addEventListener('click', function() {
     updateDisplay('0');
 });
 
-
+// Evento para o botão de apagar
 del.addEventListener('click', function() {
     delDisplay();
 });
 
-
-botao1.addEventListener('click', function(){
-    numns.push(1)
-})
-
-botao2.addEventListener('click', function(){
-    numns.push(2)
-})
-
-botao3.addEventListener('click', function(){
-    numns.push(3)
-})
-
-botao4.addEventListener('click', function(){
-    numns.push(4)
-})
-
-botao5.addEventListener('click', function(){
-    numns.push(5)
-})
-
-botao6.addEventListener('click', function(){
-    numns.push(6)
-})
-
-botao7.addEventListener('click', function(){
-    numns.push(7)
-})
-
-botao8.addEventListener('click', function(){
-    numns.push(8)
-})
-
-botao9.addEventListener('click', function(){
-    numns.push(9)
-})
-
-botao0.addEventListener('click', function(){
-    numns.push(0)
-})
-
-
-
-
-somar.addEventListener('click', function(){
-    operator = 1;
+// Adiciona eventos aos botões de operação
+somar.addEventListener('click', function() {
     updateDisplay('+');
-})
-
-subtrair.addEventListener('click', function(){
-    operator = 2;
-    updateDisplay('-');
-})
-
-multiplicar.addEventListener('click', function(){
-    operator = 3;
-    updateDisplay('*');
-})
-
-dividir.addEventListener('click', function(){
-    operator = 4;
-    updateDisplay('/');
-})
-
-
-function calculate() {
-        let result = eval(display.value);
-        display.value = result;
-        displayValue = result.toString();
-}
-
-igual.addEventListener('click', function() {
-    calculate();
-
 });
 
+subtrair.addEventListener('click', function() {
+    updateDisplay('-');
+});
+
+multiplicar.addEventListener('click', function() {
+    updateDisplay('*');
+});
+
+dividir.addEventListener('click', function() {
+    updateDisplay('/');
+});
+
+// Função para calcular o resultado
+function calculate() {
+    try {
+        let result = eval(display.value);  // Avalia a expressão no display
+        display.value = result;  // Exibe o resultado no display
+        displayValue = result.toString();
+    } catch (e) {
+        display.value = 'Erro';  // Exibe erro se a expressão for inválida
+    }
+}
+
+// Evento do botão igual
+igual.addEventListener('click', function() {
+    calculate();
+});
+
+// Evento do botão de limpar
 clear.addEventListener('click', function() {
-    display.value = '';
-})
-
-
+    display.value = '';  // Limpa o display
+});

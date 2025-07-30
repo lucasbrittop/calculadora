@@ -2,11 +2,64 @@ body{
     text-align: center;
 }
 
-#numbox{
-    width: 100%;
-    height: 100vh;
+#display{
+    margin-bottom: 2em;
+    width: 20em;
+    height: 5em;
+    font-size: 20px;
+}
+
+#resultBox{
+    margin-bottom: 2em;
+    font-size: 20px;
+}
+
+#del{
+    background-color: red;
+}
+
+#btnEqual{
+    background-color: green;
+}
+
+#btnClear{
+    background-color: rgb(20, 182, 223);
+}
+
+#btnBox{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 300px;
+    margin: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.box{
+    height: 100px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    flex: 1 1 33%;
+}
+
+.operation{
+    height: 100px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    flex: 1 1 20%;
+    width: 50px;
+}
+
+#operationBox{
+    display: flex;
+    width: 300px;
+    margin: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
 }
 
